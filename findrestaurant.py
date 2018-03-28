@@ -55,17 +55,19 @@ def findRestaurant(mealType, location):
         image = body['response']['photos']["items"][0]
         prefix = image['prefix']
         suffix = image['suffix']
-        image_url = prefix+"300x300"+suffix
+        image_url = prefix + "300x300" + suffix
     else:
         # If no image is available, insert default a image url
         image_url = "https://cdn.pixabay.com/photo/2018/03/27/09/46/wine-32" \
                     "65462_960_720.jpg"
 
-    restaurant_info = {'name':rname, 'address':raddress, 'image_url':image_url}
-    print restaurant_info['name']
-    print restaurant_info['address']
-    print restaurant_info['image_url']
+    restaurant_info = {'name': rname, 'address': raddress,
+                       'image_url': image_url}
+    print "\nRestaurant Name: %s" % restaurant_info['name']
+    print "Restaurant Address: %s" % restaurant_info['address']
+    print "Image: %s" % restaurant_info['image_url']
     return restaurant_info
+
 
 if __name__ == '__main__':
     findRestaurant("Pizza", "Tokyo, Japan")
