@@ -34,7 +34,6 @@ def findRestaurant(mealType, location):
     response = h.request(url, "GET")
     body = json.loads(response[1])
 
-
     # Grab the first restaurant
     if body['response']['venues'] is not None:
         restaurants = body['response']['venues']
@@ -46,7 +45,6 @@ def findRestaurant(mealType, location):
         for i in raddress:
             address += i + " "
         raddress = address
-
 
         #  Get a  300x300 picture of the restaurant using the venue_id
         # (you can change this by altering the 300x300 value in the URL or
@@ -64,7 +62,7 @@ def findRestaurant(mealType, location):
             suffix = image['suffix']
             image_url = prefix + "300x300" + suffix
         else:
-                # If no image is available, insert default a image url
+            # If no image is available, insert default a image url
             image_url = "https://cdn.pixabay.com/photo/2018/03/27/09/46/wine-32" \
                         "65462_960_720.jpg"
 
@@ -77,6 +75,8 @@ def findRestaurant(mealType, location):
     else:
         print " No Restaurant Found in %s " % location
         return "No Restaurant found"
+
+
 if __name__ == '__main__':
     findRestaurant("Pizza", "Tokyo, Japan")
     findRestaurant("Tacos", "Jakarta, Indonesia")
