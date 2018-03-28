@@ -69,3 +69,11 @@ def findRestaurant(mealType, location):
 
 if __name__ == '__main__':
     findRestaurant("Pizza", "Tokyo, Japan")
+    findRestaurant("Tacos", "Jakarta, Indonesia")
+    findRestaurant("Tapas", "Maputo, Mozambique")
+    findRestaurant("Falafel", "Cairo, Egypt")
+    findRestaurant("Spaghetti", "New Delhi, India")
+    findRestaurant("Cappuccino", "Geneva, Switzerland")
+    findRestaurant("Sushi", "Los Angeles, California")
+    findRestaurant("Steak", "La Paz, Bolivia")
+    findRestaurant("Gyros", "Sydney Australia")
