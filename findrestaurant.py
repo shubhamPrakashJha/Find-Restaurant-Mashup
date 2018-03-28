@@ -35,7 +35,10 @@ def findRestaurant(mealType, location):
     response = h.request(url, "GET")
     body = json.loads(response[1])
     restaurnats = body['response']['venues']
-    print restaurnats
+
+    # Grab the first restaurant
+    restaurant = restaurnats[0]['name']
+    print restaurant
 
 
 if __name__ == '__main__':
