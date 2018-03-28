@@ -22,7 +22,6 @@ def findRestaurant(mealType, location):
     lat = coordinates[0]
     lng = coordinates[1]
 
-
     # Use foursquare API to find a nearby restaurant with the
     # latitude, longitude, and mealType strings.
     url = "https://api.foursquare.com/v2/venues/search?" \
@@ -34,12 +33,39 @@ def findRestaurant(mealType, location):
     h = httplib2.Http()
     response = h.request(url, "GET")
     body = json.loads(response[1])
-    restaurnats = body['response']['venues']
+    restaurants = body['response']['venues']
 
     # Grab the first restaurant
-    restaurant = restaurnats[0]['name']
-    print restaurant
+    restaurant = restaurants[0]
+    rname = restaurant['name']
+    rid = restaurant['id']
+    raddress = restaurant['location']['formattedAddress']
 
+    #  Get a  300x300 picture of the restaurant using the venue_id
+    # (you can change this by altering the 300x300 value in the URL or
+    # replacing it with 'orginal' to get the original picture
+    images_url = "https://api.foursquare.com/v2/venues/%s/photos?" \
+                 "client_id=%s&client_secret=%s&v=%s" % (
+                     rid, foursquare_client_id, foursquare_client_secret,
+                     version)
+    response = h.request(images_url, "GET")
+    body = json.loads(response[1])
+    if body['response']['photos']['count'] != 0:
+        # Grab the first image
+        image = body['response']['photos']["items"][0]
+        prefix = image['prefix']
+        suffix = image['suffix']
+        image_url = prefix+"300x300"+suffix
+    else:
+        # If no image is available, insert default a image url
+        image_url = "https://cdn.pixabay.com/photo/2018/03/27/09/46/wine-32" \
+                    "65462_960_720.jpg"
+
+    restaurant_info = {'name':rname, 'address':raddress, 'image_url':image_url}
+    print restaurant_info['name']
+    print restaurant_info['address']
+    print restaurant_info['image_url']
+    return restaurant_info
 
 if __name__ == '__main__':
     findRestaurant("Pizza", "Tokyo, Japan")
